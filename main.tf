@@ -1,3 +1,4 @@
+
 terraform {
   required_providers {
     aws = {
@@ -112,3 +113,4 @@ resource "aws_apigatewayv2_stage" "default_stage" {
 output "api_endpoint" {
   value = aws_apigatewayv2_api.hello_goodbye.api_endpoint
 }
+

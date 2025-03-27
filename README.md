@@ -141,7 +141,7 @@ data "aws_iam_role" "lambda_role" {
 }
 
 resource "aws_lambda_function" "lambda_function" {
-  function_name = "formation-global-apollo-leads"
+  function_name = "hello-goodbye"
   runtime       = "python3.9"
   handler       = "lambda_function.lambda_handler"
   role          = data.aws_iam_role.lambda_role.arn
@@ -169,13 +169,13 @@ resource "aws_lambda_function" "lambda_function" {
 Create the API Gateway endpoint
 
 ```hcl
-resource "aws_apigatewayv2_api" "formation_global_apollo_leads" {
-  name          = "formation-global-apollo-leads"
+resource "aws_apigatewayv2_api" "hello_goodbye" {
+  name          = "hello-goodbye"
   protocol_type = "HTTP"
 }
 
 resource "aws_apigatewayv2_integration" "lambda_integration" {
-  api_id               = aws_apigatewayv2_api.formation_global_apollo_leads.id
+  api_id               = aws_apigatewayv2_api.hello_goodbye.id
   integration_type     = "AWS_PROXY"
   integration_uri      = aws_lambda_function.lambda_function.arn
   passthrough_behavior = "WHEN_NO_MATCH"
@@ -184,7 +184,7 @@ resource "aws_apigatewayv2_integration" "lambda_integration" {
 }
 
 resource "aws_apigatewayv2_route" "default_route" {
-  api_id    = aws_apigatewayv2_api.formation_global_apollo_leads.id
+  api_id    = aws_apigatewayv2_api.hello_goodbye.id
   route_key = "POST /"
 
   target = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
@@ -195,11 +195,11 @@ resource "aws_lambda_permission" "apigw_permission" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.lambda_function.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_apigatewayv2_api.formation_global_apollo_leads.execution_arn}/*/*"
+  source_arn    = "${aws_apigatewayv2_api.hello_goodbye.execution_arn}/*/*"
 }
 
 resource "aws_apigatewayv2_stage" "default_stage" {
-  api_id      = aws_apigatewayv2_api.formation_global_apollo_leads.id
+  api_id      = aws_apigatewayv2_api.hello_goodbye.id
   name        = "$default"
   auto_deploy = true
 }
@@ -209,7 +209,7 @@ Output the API Gateway endpoint
 
 ```hcl
 output "api_endpoint" {
-  value = aws_apigatewayv2_api.formation_global_apollo_leads.api_endpoint
+  value = aws_apigatewayv2_api.hello_goodbye.api_endpoint
 }
 ```
 
