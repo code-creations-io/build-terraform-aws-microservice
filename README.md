@@ -27,7 +27,7 @@
 
 This code repository was tested on the following computers:
 
-- Windows 11
+- macOS Sonoma
 
 ### Installation
 
