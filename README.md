@@ -12,11 +12,14 @@
   - [Code Structure](#code-structure)
   - [Tech stack](#tech-stack)
   - [Build from scratch](#build-from-scratch)
-    - [1. Build the Docker container](#1-build-the-docker-container)
-    - [2. Initialize the Terraform Configuration](#2-initialize-the-terraform-configuration)
-    - [3. Review the Plan](#3-review-the-plan)
+    - [1. Build the main.tf file](#1-build-the-maintf-file)
+    - [2. Create the Lambda function](#2-create-the-lambda-function)
+    - [3. Build the Docker container](#3-build-the-docker-container)
+    - [4. Initialize the Terraform Configuration](#4-initialize-the-terraform-configuration)
+    - [5. Review the Plan](#5-review-the-plan)
     - [4. Apply the Terraform Configuration](#4-apply-the-terraform-configuration)
-    - [5. Destroy the resources](#5-destroy-the-resources)
+    - [6. Destroy the resources](#6-destroy-the-resources)
+    - [7. Some useful commands](#7-some-useful-commands)
 
 ## Setup
 
